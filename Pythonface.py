@@ -8,6 +8,8 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 640)
 cap.set(4, 480)
 
+people = 0
+
 
 def NumberToName(n):
     if n == 0:
@@ -26,14 +28,17 @@ def NumberToName(n):
         return "many"
 
 
-Speaker = gTTS(NumberToName(1) + " people here", lang="en")
-Speaker.save("PeopleHere.mp3")
-os.system("start PeopleHere.mp3")
-
 Detector = FaceDetector()
 
 while True:
     (success, img) = cap.read()
     (img, bboxs) = Detector.findFaces(img, draw=True)
+    if len(bboxs) != people:
+        people = len(bboxs)
+        print(people)
+        Speaker = gTTS(NumberToName(people) + " people here", lang="en")
+        Speaker.save("PeopleHere.mp3")
+        os.system("start PeopleHere.mp3")
+
     cv2.imshow("Image", img)
     cv2.waitKey(1)
