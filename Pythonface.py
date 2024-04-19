@@ -1,11 +1,34 @@
 import cv2
 from cvzone.FaceDetectionModule import FaceDetector
-import gtts as gTTS
+from gtts import gTTS
+import os
 
 cap = cv2.VideoCapture(0)
 
 cap.set(3, 640)
 cap.set(4, 480)
+
+
+def NumberToName(n):
+    if n == 0:
+        return "zero"
+    elif n == 1:
+        return "one"
+    elif n == 2:
+        return "two"
+    elif n == 3:
+        return "three"
+    elif n == 4:
+        return "four"
+    elif n == 5:
+        return "five"
+    else:
+        return "many"
+
+
+Speaker = gTTS(NumberToName(1) + " people here", lang="en")
+Speaker.save("PeopleHere.mp3")
+os.system("start PeopleHere.mp3")
 
 Detector = FaceDetector()
 
