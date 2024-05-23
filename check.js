@@ -1,0 +1,1 @@
+fetch("http://192.168.1.10/capture").then((res)=>console.log(res))
