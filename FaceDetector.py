@@ -1,6 +1,6 @@
 from typing import Any, List, Tuple
 from cv2.typing import MatLike
-import mediapipe as mp
+import mediapipe as mp  # type:ignore
 import cv2
 
 from detectors import Detector

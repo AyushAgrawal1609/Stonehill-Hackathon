@@ -1,11 +1,12 @@
-from typing import Any, Tuple
+from typing import Any
 import cv2
 import numpy as np
-import mediapipe as mp
-from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
+import mediapipe as mp  # type: ignore
+from mediapipe.tasks import python  # type:ignore
+from mediapipe.tasks.python import vision  # type:ignore
 from cv2.typing import MatLike
 from detectors import Detector
+import os
 
 
 class ObjectDetector2D(Detector):
@@ -13,7 +14,7 @@ class ObjectDetector2D(Detector):
 
         # STEP 2: Create an ObjectDetector object.
         self.base_options = python.BaseOptions(
-            model_asset_path="C:/Users/Admin/Documents/Stonehill Hackathon/ssd_mobilenet_v2.tflite"
+            model_asset_path="\\Users/Admin/Documents/Stonehill Hackathon/ssd_mobilenet_v2.tflite"
         )
         self.options = vision.ObjectDetectorOptions(
             base_options=self.base_options, score_threshold=0.5
@@ -56,7 +57,7 @@ def main():
     detector = ObjectDetector2D()
     cap = cv2.VideoCapture(0)
     while True:
-        (success, img) = cap.read()
+        (_, img) = cap.read()
         info = detector.find(img)
         cv2.imshow("Image", detector.draw(img, info))
         cv2.waitKey(1)
